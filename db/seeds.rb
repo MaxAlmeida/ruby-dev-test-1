@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+dir1 = Directory.new(name: 'Raiz')
+dir1.files = [
+  Pathname.new("#{Rails.root}/spec/fixtures/test_file.txt").open,
+  Pathname.new("#{Rails.root}/spec/fixtures/test_file_2.txt").open
+]
+dir1.save!
+
+dir2 = Directory.new(name: 'Filho', directory: dir1)
+dir2.files = [
+  Pathname.new("#{Rails.root}/spec/fixtures/test_file.txt").open
+]
+
+dir2.save!

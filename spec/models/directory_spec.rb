@@ -9,4 +9,24 @@ RSpec.describe Directory, type: :model do
     it { is_expected.to belong_to(:directory).optional }
     it { is_expected.to have_many(:directories) }
   end
+
+  describe '#path' do
+    context 'when folder is root' do
+      let!(:directory){create(:directory)}
+      let!(:storage){"spec/support/storage/"}
+      it "expect return directory root path" do
+        expect(directory.path).to eq(Rails.root.join(storage+directory.name).to_s)
+      end
+    end
+
+    context "when folder inside another folder" do
+      let(:parent){create(:directory)}
+      let!(:directory){create(:directory, directory: parent)}
+      let!(:storage){"spec/support/storage/"}
+      it "expect return path with parent folder path" do
+        expected_directory =  Rails.root.join(storage+parent.name+"/"+directory.name).to_s
+        expect(directory.path).to eq(expected_directory)
+      end
+    end
+  end
 end
