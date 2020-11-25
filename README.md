@@ -9,6 +9,7 @@ Realizar um fork deste repositório.
 ## Proposed solution
 The modeling consists of a tree structure whose model directory references itself and has several files.After the object is created in the database, a directory with the same name and within the parent directory, if any, is created. The directories and subdirectories with your files are created within the storage directory at the root of the project.To simulate the sending of files, the CarrierWave gem was used.
 
+![alt text](https://github.com/MaxAlmeida/ruby-dev-test-1/blob/file_system/modeling.jpg?raw=true)
 
 
 ## How to run the project in local enviroment?
@@ -25,3 +26,6 @@ The modeling consists of a tree structure whose model directory references itsel
 - Feed data to database - `rails db:seed `
 
 After feed database with rails db:seed, the following file and directory structure is expected:
+
+
+![alt text](https://github.com/MaxAlmeida/ruby-dev-test-1/blob/file_system/folder_seed.jpg?raw=true)
