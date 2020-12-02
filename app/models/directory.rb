@@ -21,6 +21,22 @@ class Directory < ApplicationRecord
     end
   end
 
+  def ordered_itens
+    directories_items = directories.map do |dir|
+      {item_name: dir.name, type: 'folder'}
+    end
+
+    files_items = files.map do |file|
+      file_name = file.send("identifier")
+      {item_name: file_name, type: file_name.partition('.').last}
+    end
+    itens = []
+    itens << directories_items
+    itens << files_items
+
+    itens.flatten.sort_by{ |k| k[:item_name]}
+  end
+
   private
 
   def create_directory

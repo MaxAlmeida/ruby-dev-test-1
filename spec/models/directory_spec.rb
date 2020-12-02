@@ -29,4 +29,14 @@ RSpec.describe Directory, type: :model do
       end
     end
   end
+
+  describe '#ordered_items' do
+    let!(:parent){create(:directory, :with_file)}
+    let!(:directory_a){create(:directory, name: 'a_folder', directory: parent)}
+    let!(:directory_z){create(:directory, name: 'z_folder', directory: parent)}
+
+    it "expect return orderd itens" do
+      expect(parent.ordered_itens.pluck(:item_name)).to match_array(["a_folder", "test_file.txt", "z_folder"])
+    end
+  end
 end
